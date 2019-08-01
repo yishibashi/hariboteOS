@@ -26,7 +26,8 @@ CYLS    EQU     10              ; どこまで読み込むか (CYLinderS)
 		DD		0xffffffff		; たぶんボリュームシリアル番号
 		DB		"HELLO-OS   "	; ディスクの名前（11バイト）
 		DB		"FAT12   "		; フォーマットの名前（8バイト）
-		RESB	18				; とりあえず18バイトあけておく
+		; RESB	18				; とりあえず18バイトあけておく
+		TIMES	18	DB 0		; とりあえず18バイトあけておく
 
 ; プログラム本体
 
@@ -83,6 +84,7 @@ next:
 		JB		readloop		; CH < CYLS だったらreadloopへ
 
 ; 読み終わったのでharibote.sysを実行だ
+		MOV		[0x0ff0], CH 
 		JMP		0xc200
 
 fin:
