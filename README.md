@@ -3,7 +3,7 @@
 memo
 ```
 $ nasm hoge.nas -o hoge.img // -l hoge.lst を追加すると対応する機械語が表示できる
-$ qemu-system-i386 hoge.img
+$ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオプションを付ける
 ```
 
 ## day1
@@ -86,3 +86,25 @@ $ qemu-system-i386 hoge.img
   - DS
   - FS
   - GS
+
+
+## day3
+
+- 書籍のリンク(... community.osdev.info ...)は古いので[こちら](http://oswiki.osask.jp/?%28AT%29BIOS)を参考にする.
+- fdaオプションをつける.
+  ```
+  $ qemu-system-i386  -fda hoge.img
+  ```
+
+
+- したこと
+
+
+- アセンブラ命令.
+  - JC ... jump if carry. キャリーフラグが１だったらジャンプしなさい，という命令. ``INT 0x10``を読んでエラーがない場合はキャリーフラグが０，エラーがある場合はキャリーフラグが１になる．
+  - JNC ... jump if not carry.
+  - JBE ... jump if below or equal
+  - JB ... jump if below 
+  - EQU ... C言語でいう#define. 定数を宣言するのに使う.
+
+
