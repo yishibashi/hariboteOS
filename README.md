@@ -29,9 +29,9 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
 ## day2
 
 - したこと
-  0. CD-ROMの projects/02_days を作業ディレクトリにコピー.(アーカイブマネージャーを使えばCD-ROMの中身を見ることができる．)
-  1. helloos3/helloos.nas のl.58を``RESB    0x7dfe-0x7c00-($-$$)``に変更すると動く.[参考](https://qiita.com/pollenjp/items/d15fce401bccd37e8059#helloos3%E3%81%A7%E8%A9%B0%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%93%E3%82%8D) 
-  2. helloos4/ipl.nas も同様.
+  1. CD-ROMの projects/02_days を作業ディレクトリにコピー.(アーカイブマネージャーを使えばCD-ROMの中身を見ることができる．)
+  2. helloos3/helloos.nas のl.58を``RESB    0x7dfe-0x7c00-($-$$)``に変更すると動く.[参考](https://qiita.com/pollenjp/items/d15fce401bccd37e8059#helloos3%E3%81%A7%E8%A9%B0%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%93%E3%82%8D) 
+  3. helloos4/ipl.nas も同様.
 
 - アセンブラ命令.
   - $$ ... 現在のセクションの最初を表す.
