@@ -131,7 +131,7 @@ memcpy:
 		RET
 ; memcpyはアドレスサイズプリフィクスを入れ忘れなければ、ストリング命令でも書ける
 
-		TIMES	16		DB	0
+		ALIGNB	16,		DB		0
 GDT0:
 		TIMES	8	DB	0					; ヌルセレクタ
 		DW		0xffff,0x0000,0x9200,0x00cf	; 読み書き可能セグメント32bit
@@ -142,6 +142,6 @@ GDTR0:
 		DW		8*3-1
 		DD		GDT0
 
-		TIMES	16		DB		0
+		ALIGNB	16,		DB		0
 bootpack:
 
