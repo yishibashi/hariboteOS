@@ -90,14 +90,31 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
 
 ## day3
 
+著者作成のツールを使わない人向け．（面倒な所が多い）
+
+
 - 書籍のリンク(... community.osdev.info ...)は古いので[こちら](http://oswiki.osask.jp/?%28AT%29BIOS)を参考にする.
 - fdaオプションをつける.
   ```
   $ qemu-system-i386  -fda hoge.img
   ```
 
+- 参考文献・リンク
+  - [30日OS自作入門-3日目（C言語導入）-](https://motojiroxx.hatenablog.com/entry/2018/06/11/004414)
+  - [OS自作入門 3日目-2 【Linux】| デバッグして実行順序を追ってみる](http://bttb.s1.valueserver.jp/wordpress/blog/2017/12/06/makeos-3-2/)
+  - [『30日でできる！OS自作入門』をLinuxでやってみる 3日目](https://syusui.tumblr.com/post/109884535088/30%E6%97%A5%E3%81%A7%E3%81%A7%E3%81%8D%E3%82%8Bos%E8%87%AA%E4%BD%9C%E5%85%A5%E9%96%80%E3%82%92linux%E3%81%A7%E3%82%84%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B-3%E6%97%A5%E7%9B%AE?is_related_post=1)
+  - [Linuxがブートするまで](https://keichi.net/post/linux-boot/)
+  - [linux-inside](https://0xax.gitbooks.io/linux-insides/)
 
 - したこと
+  - IPL(初期プログラムローダ)の作成.
+  - 5 OS本体を書き始める: haribote.sys と ipl.bin をくっつける.(Makefile参照.)
+    ```
+    mformat -f 1440 -C -B ipl.bin -i haribote.img ::
+    mcopy haribote.sys -i haribote.img ::
+    ```
+ - 9 ついにC言語導入へ: 参考文献・リンクを参考にする．(これもMakefile参照.)
+   
 
 
 - アセンブラ命令.
