@@ -1,5 +1,7 @@
 *.lst
 *.bin
 *.sys
-*.img *.hrb
+*.img
+*.hrb
 *.o
+
