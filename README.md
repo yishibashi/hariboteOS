@@ -114,7 +114,7 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
     mcopy haribote.sys -i haribote.img ::
     ```
  - 9 ついにC言語導入へ: 参考文献・リンクを参考にする．(これもMakefile参照.)
-   
+
 
 
 - アセンブラ命令.
@@ -125,3 +125,9 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
   - EQU ... C言語でいう#define. 定数を宣言するのに使う.
 
 
+## day4
+
+- INSERT命令は追加せずにnasmのオプションで指定した.
+
+- アセンブラ命令.
+  - 
