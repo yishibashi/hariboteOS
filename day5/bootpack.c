@@ -1,3 +1,5 @@
+#include <stdarg.h>
+
 extern void _io_hlt(void);
 extern void _io_cli(void);
 extern void _io_out8(int port, int data);
@@ -10,6 +12,11 @@ void boxfill8(unsigned char *vram, int xsize, unsigned char c, int x0, int y0, i
 void init_screen(char *vram, int x, int y);
 void putfont8(char *vram, int xsize, int x, int y, char c, char *font);
 void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s);
+
+
+int dec2asc (char *str, int dec);
+int hex2asc (char *str, int dec);
+void sprintf (char *str, char *fmt, ...);
 
 #define COL8_000000		0
 #define COL8_FF0000		1
@@ -48,6 +55,11 @@ void HariMain(void)
 	putfonts8_asc(binfo->vram, binfo->scrnx, 8,8, COL8_FFFFFF, "TWITTER !");
 	putfonts8_asc(binfo->vram, binfo->scrnx, 32,32, COL8_000000, "TWITTER !");
 	putfonts8_asc(binfo->vram, binfo->scrnx, 31,31, COL8_FFFFFF, "TWITTER !");
+
+	char s[40];
+	sprintf(s, "scrnx = %d", binfo->scrnx);
+	putfonts8_asc(binfo->vram, binfo->scrnx, 16,64, COL8_FFFFFF, s);
+
 
 
   for (;;) {
@@ -159,3 +171,64 @@ void putfonts8_asc(char *vram, int xsize, int x, int y, char c, unsigned char *s
 	return;
 }
 
+
+//
+
+
+//10進数からASCIIコードに変換
+int dec2asc (char *str, int dec) {
+    int len = 0, len_buf; //桁数
+    int buf[10];
+    while (1) { //10で割れた回数（つまり桁数）をlenに、各桁をbufに格納
+        buf[len++] = dec % 10;
+        if (dec < 10) break;
+        dec /= 10;
+    }
+    len_buf = len;
+    while (len) {
+        *(str++) = buf[--len] + 0x30;
+    }
+    return len_buf;
+}
+
+//16進数からASCIIコードに変換
+int hex2asc (char *str, int dec) { //10で割れた回数（つまり桁数）をlenに、各桁をbufに格納
+    int len = 0, len_buf; //桁数
+    int buf[10];
+    while (1) {
+        buf[len++] = dec % 16;
+        if (dec < 16) break;
+        dec /= 16;
+    }
+    len_buf = len;
+    while (len) {
+        len --;
+        *(str++) = (buf[len]<10)?(buf[len] + 0x30):(buf[len] - 9 + 0x60);
+    }
+    return len_buf;
+}
+
+void sprintf (char *str, char *fmt, ...) {
+    va_list list;
+    int i, len;
+    va_start (list, 2);
+
+    while (*fmt) {
+        if(*fmt=='%') {
+            fmt++;
+            switch(*fmt){
+                case 'd':
+                    len = dec2asc(str, va_arg (list, int));
+                    break;
+                case 'x':
+                    len = hex2asc(str, va_arg (list, int));
+                    break;
+            }
+            str += len; fmt++;
+        } else {
+            *(str++) = *(fmt++);
+        }	
+    }
+    *str = 0x00; //最後にNULLを追加
+    va_end (list);
+}
