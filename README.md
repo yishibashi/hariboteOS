@@ -40,7 +40,7 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
     >The function of the ORG directive is to specify the origin address which NASM will assume the program begins at when it is loaded into memory.
   - JUMP ... そのままの意味. C言語でいうgoto文.
   - MOV ... move. 代入．
-  - <label name>: ... entry: , putloop: など．　ラベルの宣言.
+  - \<label name\>: ... entry: , putloop: など．　ラベルの宣言.
   - ADD ... 足し算.
   - CMP ... 比較命令.
   - JE ... 条件ジャンプ. 比較命令の結果によってジャンプをしたりしなかったりする．
@@ -126,8 +126,30 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
 
 
 ## day4
+(メモを取るのを忘れてた.)
 
 - INSERT命令は追加せずにnasmのオプションで指定した.
 
 - アセンブラ命令.
-  - 
+
+
+## day5
+
+- したこと
+  - 5 フォントを増やしたい　までは本に沿って進めていくだけ．
+  - 5　でフォントを増やすために配布されていた makefont.c を改造して  
+    ```
+     char hankaku[4096] = {
+	   0x00,0x00, ..., 0x00
+	   ... ...
+	   0x00, 0x18, ..., 0xe7, 0x00, 0x00 // A
+	   ... ...
+	   ...
+	 };
+	```
+	というコードを hankaku.c というファイルに掃き出しそれを bootpack.c から読み込むようにした.
+  - sprintf 動かず. 取り敢えず，sprintf を bootpack.c に直接書いた．
+  - あとは本に従っていく.
+
+
+
