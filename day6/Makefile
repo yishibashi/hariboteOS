@@ -1,4 +1,3 @@
-
 CFLAGS = -c -m32 -march=i486 -fno-pic -nostdlib
 
 ipl.bin : ipl.asm 

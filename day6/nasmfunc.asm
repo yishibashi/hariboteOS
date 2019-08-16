@@ -1,25 +1,14 @@
 ; naskfunc
 ; TAB=4
 
-;[FORMAT "WOOFF"]							; オブジェクトファイルを作るモード
-;[BITS 32]									; 32ビットモード用の機械語を作らせる
-
-; オブジェクトファイルのための情報
-
-;[FILE "naskfunc.nas"]						; ソースファイル名情報
-
-;		GLOBAL _io_hlt						; このプログラムに含まれる関数名
-
-; 以下は実際の関数
-
-;[SECTION .text] 							; オブジェクトファイルではこれを書いてからプログラムを書く
-
 section .text
 		GLOBAL io_hlt, io_cli, io_sti, io_stihlt
 		GLOBAL io_in8, io_in16, io_in32
 		GLOBAL io_out8, io_out16, io_out32
 		GLOBAL io_load_eflags, io_store_eflags
 		GLOBAL load_gdtr, load_idtr
+		GLOBAL asm_inthandler21, asm_inthandler27, asm_inthandler2c
+		EXTERN inthandler21, inthandler27, inthandler2c
 
 
 
@@ -96,3 +85,51 @@ load_idtr:		; void load_idtr(int limit, int addr)
 		mov 	[esp + 6], ax
 		lidt	[esp + 6]
 		ret
+
+asm_inthandler21:
+		PUSH	ES
+		PUSH	DS
+		PUSHAD
+		MOV		EAX,ESP
+		PUSH	EAX
+		MOV		AX,SS
+		MOV		DS,AX
+		MOV		ES,AX
+		CALL	inthandler21
+		POP		EAX
+		POPAD
+		POP		DS
+		POP		ES
+		IRETD
+
+asm_inthandler27:
+		PUSH	ES
+		PUSH	DS
+		PUSHAD
+		MOV		EAX,ESP
+		PUSH	EAX
+		MOV		AX,SS
+		MOV		DS,AX
+		MOV		ES,AX
+		CALL	inthandler27
+		POP		EAX
+		POPAD
+		POP		DS
+		POP		ES
+		IRETD
+
+asm_inthandler2c:
+		PUSH	ES
+		PUSH	DS
+		PUSHAD
+		MOV		EAX,ESP
+		PUSH	EAX
+		MOV		AX,SS
+		MOV		DS,AX
+		MOV		ES,AX
+		CALL	inthandler2c
+		POP		EAX
+		POPAD
+		POP		DS
+		POP		ES
+		IRETD
