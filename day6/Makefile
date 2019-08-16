@@ -54,4 +54,4 @@ debug :
 
 .PHONY: clean
 clean : 
-	rm *.lst *.bin *.sys *.img *.hrb *.o makefont
+	rm *.lst *.bin *.sys *.img *.hrb *.o 

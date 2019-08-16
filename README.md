@@ -158,4 +158,7 @@ $ qemu-system-i386 hoge.img // 上手く行かないときは, -fda というオ
 - したこと
   - bootpack.c の分割.
     - Makefile を修正した. 特に ``-fno-pic`` オプションを付け忘れると動かないことに注意する.(このあたりはよくわかってない.[参考, OS自作入門 6日目-1 【Linux】 | 分割コンパイル](http://bttb.s1.valueserver.jp/wordpress/blog/2017/12/21/makeos-6-1/))
+  - あとは本に書いてる通りにすすめていけるはず。
+
+
 
