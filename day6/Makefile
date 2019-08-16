@@ -16,7 +16,7 @@ nasmfunc.o : nasmfunc.asm
 
 
 
-OBJS = nasmfunc.o bootpack.o dsctbl.o graphic.o hankaku.o
+OBJS = nasmfunc.o bootpack.o dsctbl.o graphic.o hankaku.o int.o sprintf.o
 bootpack.hrb :  os.lds $(OBJS)
 	ld -m elf_i386 -T os.lds $(OBJS) -o $@
 
