@@ -14,6 +14,7 @@ extern void io_hlt(void);
 extern void io_cli(void);
 extern void io_sti(void);
 extern void io_stihlt(void);
+extern int io_in8(int port);
 extern void io_out8(int port, int data);
 extern int io_load_eflags(void);
 extern void io_store_eflags(int eflags);
@@ -85,10 +86,6 @@ void set_gatedesc(struct GATE_DESCRIPTOR *gd, int offset, int selector, int ar);
 #define AR_INTGATE32	0x008e
 
 /* int.c */
-struct KEYBUF {
-		unsigned char data[32];
-		int next_r, next_w, len;
-};
 void init_pic(void);
 void inthandler21(int *esp);
 void inthandler27(int *esp);
